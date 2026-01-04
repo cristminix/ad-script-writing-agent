@@ -1,0 +1,29 @@
+{
+  "python.analysis.packageIndexDepths": [
+    {
+      "name": "langchain_openai",
+      "depth": 2,
+      "includeAllSymbols": true
+    },
+    {
+      "name": "langchain_core",
+      "depth": 2,
+      "includeAllSymbols": true
+    },
+    {
+      "name": "langgraph",
+      "depth": 2,
+      "includeAllSymbols": true
+    },
+    {
+      "name": "",
+      "depth": 3,
+      "includeAllSymbols": true
+    }
+  ],
+  "python.analysis.extraPaths": [
+    "./src"
+  ],
+  "python.defaultInterpreterPath": "./venv/bin/python",
+  "python.terminal.activateEnvironment": true
+}
