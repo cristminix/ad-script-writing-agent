@@ -3,40 +3,40 @@ from src.agent.state import VideoScriptDraft, StaticAdDraft, EvaluationReport
 
 
 def display_video_script(script: VideoScriptDraft):
-    """Display a video script in a formatted way."""
-    st.subheader("📹 Video Ad Script")
+    """Menampilkan skrip video dengan format yang rapi."""
+    st.subheader("📹 Skrip Iklan Video")
 
     # Basic info
     col1, col2, col3 = st.columns(3)
     with col1:
         st.metric("Platform", script.ad_platform_target.replace('_', ' ').title())
     with col2:
-        st.metric("Duration", f"{script.duration_estimate_seconds}s")
+        st.metric("Durasi", f"{script.duration_estimate_seconds}s")
     with col3:
-        st.metric("Scenes", len(script.scenes))
+        st.metric("Adegan", len(script.scenes))
 
     st.markdown("---")
 
     # Scenes
-    st.subheader("🎬 Scenes")
+    st.subheader("🎬 Adegan")
     for scene in script.scenes:
         with st.expander(f"Scene {scene.scene_number} ({scene.duration_seconds}s)", expanded=True):
             col1, col2 = st.columns(2)
 
             with col1:
-                st.markdown("**Visual Description:**")
+                st.markdown("**Deskripsi Visual:**")
                 st.write(scene.visual_description)
 
                 if scene.on_screen_text:
-                    st.markdown("**On-Screen Text:**")
+                    st.markdown("**Teks di Layar:**")
                     st.info(scene.on_screen_text)
 
             with col2:
-                st.markdown("**Audio Description:**")
+                st.markdown("**Deskripsi Audio:**")
                 st.write(scene.audio_description)
 
                 if scene.voiceover_dialogue:
-                    st.markdown("**Voiceover/Dialogue:**")
+                    st.markdown("**Sulih Suara/Dialog:**")
                     st.write(scene.voiceover_dialogue)
 
     # CTA and hashtags
@@ -44,22 +44,22 @@ def display_video_script(script: VideoScriptDraft):
     col1, col2 = st.columns(2)
 
     with col1:
-        st.subheader("🎯 Call to Action")
+        st.subheader("🎯 Ajakan Bertindak")
         st.success(script.call_to_action_text)
 
     with col2:
-        st.subheader("🏷️ Suggested Hashtags")
+        st.subheader("🏷️ Hashtag yang Disarankan")
         hashtag_text = " ".join([f"#{tag}" for tag in script.suggested_hashtags])
         st.code(hashtag_text)
 
     # Key takeaway
-    st.subheader("💡 Key Takeaway")
+    st.subheader("💡 Poin Penting")
     st.info(script.key_takeaway)
 
 
 def display_static_script(script: StaticAdDraft):
-    """Display a static ad script in a formatted way."""
-    st.subheader("📱 Static Ad Script")
+    """Menampilkan skrip iklan statis dengan format yang rapi."""
+    st.subheader("📱 Skrip Iklan Statis")
 
     # Basic info
     st.metric("Platform", script.ad_platform_target.replace('_', ' ').title())
@@ -70,55 +70,55 @@ def display_static_script(script: StaticAdDraft):
     col1, col2 = st.columns([2, 1])
 
     with col1:
-        st.subheader("📝 Ad Copy")
+        st.subheader("📝 Salinan Iklan")
 
-        st.markdown("**Headline:**")
+        st.markdown("**Judul:**")
         st.markdown(f"# {script.headline}")
 
-        st.markdown("**Body Copy:**")
+        st.markdown("**Isi:**")
         st.write(script.body_copy)
 
-        st.markdown("**Call to Action:**")
+        st.markdown("**Ajakan Bertindak:**")
         st.success(script.call_to_action_text)
 
     with col2:
-        st.subheader("🖼️ Visual Elements")
+        st.subheader("🖼️ Elemen Visual")
 
-        st.markdown("**Image Description:**")
+        st.markdown("**Deskripsi Gambar:**")
         st.write(script.image_description)
 
         if script.on_image_text:
-            st.markdown("**Text on Image:**")
+            st.markdown("**Teks pada Gambar:**")
             st.info(script.on_image_text)
 
-        st.markdown("**Hashtags:**")
+        st.markdown("**Hashtag:**")
         hashtag_text = " ".join([f"#{tag}" for tag in script.suggested_hashtags])
         st.code(hashtag_text)
 
     # Key takeaway
     st.markdown("---")
-    st.subheader("💡 Key Takeaway")
+    st.subheader("💡 Poin Penting")
     st.info(script.key_takeaway)
 
 
 def display_evaluation_scores(evaluation: EvaluationReport):
-    """Display evaluation scores in a formatted way."""
-    st.subheader("📊 Quality Evaluation")
+    """Menampilkan skor evaluasi dengan format yang rapi."""
+    st.subheader("📊 Evaluasi Kualitas")
 
     # Overall score
     col1, col2 = st.columns([1, 2])
     with col1:
         score_color = "green" if evaluation.overall_score >= 4.0 else "orange" if evaluation.overall_score >= 3.0 else "red"
-        st.metric("Overall Score", f"{evaluation.overall_score:.1f}/5.0")
+        st.metric("Skor Keseluruhan", f"{evaluation.overall_score:.1f}/5.0")
 
     with col2:
-        approval_status = "✅ Approved" if evaluation.is_approved_for_next_stage else "🔄 Needs Refinement"
+        approval_status = "✅ Disetujui" if evaluation.is_approved_for_next_stage else "🔄 Perlu Penyempurnaan"
         st.success(approval_status) if evaluation.is_approved_for_next_stage else st.warning(approval_status)
 
     st.markdown("---")
 
     # Detailed scores
-    st.subheader("📋 Detailed Scores")
+    st.subheader("📋 Skor Terperinci")
 
     # Create score grid
     criteria_items = list(evaluation.detailed_scores.items())
@@ -139,36 +139,36 @@ def display_evaluation_scores(evaluation: EvaluationReport):
                     st.markdown(f"**{criterion.value.replace('_', ' ').title()}**")
                     st.markdown(f"{score_color} {score}/5")
 
-                    with st.expander("View Feedback"):
+                    with st.expander("Lihat Umpan Balik"):
                         st.write(metric.feedback)
 
     # Summary feedback
     st.markdown("---")
-    st.subheader("📝 Summary Feedback")
+    st.subheader("📝 Umpan Balik Ringkasan")
     st.info(evaluation.summary_feedback)
 
     # Recommendations
     if evaluation.actionable_recommendations:
-        st.subheader("🔧 Recommendations")
+        st.subheader("🔧 Rekomendasi")
         for i, rec in enumerate(evaluation.actionable_recommendations, 1):
             st.write(f"{i}. {rec}")
 
 
 def display_iteration_history(history):
-    """Display script iteration history."""
+    """Menampilkan riwayat iterasi skrip."""
     if not history:
-        st.info("No iteration history available.")
+        st.info("Tidak ada riwayat iterasi tersedia.")
         return
 
-    st.subheader("🔄 Refinement History")
+    st.subheader("🔄 Riwayat Penyempurnaan")
 
     for i, entry in enumerate(history):
         with st.expander(f"Iteration {i + 1} - {entry.get('timestamp', 'Unknown time')}"):
             if 'previous_evaluation_report' in entry:
                 prev_eval = entry['previous_evaluation_report']
-                st.write(f"**Previous Score:** {prev_eval.get('overall_score', 'N/A')}/5.0")
+                st.write(f"**Skor Sebelumnya:** {prev_eval.get('overall_score', 'N/A')}/5.0")
 
                 if 'actionable_recommendations' in prev_eval:
-                    st.write("**Recommendations Implemented:**")
+                    st.write("**Rekomendasi yang Diterapkan:**")
                     for rec in prev_eval['actionable_recommendations']:
                         st.write(f"• {rec}")

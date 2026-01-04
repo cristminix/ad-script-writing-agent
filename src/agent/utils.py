@@ -25,15 +25,15 @@ def format_dict_as_list(d: Dict[str, str]) -> str:
 
 def read_yaml_from_parent(filename):
     """
-    Read and parse a YAML file located one directory above the script's location.
+    Membaca dan mengurai file YAML yang terletak satu direktori di atas lokasi skrip.
 
     Args:
-        filename (str): Name of the YAML file (e.g., 'your_file.yaml').
+        filename (str): Nama file YAML (misalnya, 'your_file.yaml').
 
     Returns:
-        dict or list: Parsed contents of the YAML file.
+        dict or list: Konten yang telah diurai dari file YAML.
     """
-    yaml_path = "src/agent/copywriting_guideline.yaml"
+    yaml_path = "/projects/ad_script_writing_agent/src/agent/copywriting_guideline.yaml"
 
     with open(yaml_path, 'r', encoding='utf-8') as f:
         return yaml.safe_load(f)
@@ -45,10 +45,10 @@ def build_audience_insight_message(state: AgentState) -> List[BaseMessage]:
     p = state.product
 
     user_content_string = f"""\
-### Target Audience Profile ###
+### Profil Target Audiens  ###
 {json.dumps(a.model_dump(), indent=2)}
 
-### Product Details ###
+### Detail Produk ###
 {json.dumps(p.model_dump(), indent=2)}
 """
 
@@ -64,26 +64,26 @@ def build_creative_strategy_message(state: AgentState) -> List[BaseMessage]:
     ai = state.audience_insight
     guideline = read_yaml_from_parent('copywriting_guideline.yaml')
     preferred_hook_examples = [
-        "Your phone's camera is now your personal chef. Here's how.",
-        "What if you could turn THIS [show photo of a delicious dish with cheese and fat] into YOUR weight lose friendly meal?"
-        "Sick of recipes that ignore your allergies and fitness goals?",
-        "Tired of boring meals that don't fit your diet?",
-        "Still searching for a ‘keto, no-nuts’ dinner idea? Watch this...",
-        "Post-workout and starving? Let this app pick tonight’s meal while you cool down.",
-        "Struggling to find a dish that matches your diet perfectly?",
-        "Tired of boring meal preps? See how I made my cravings work for my goals!",
-        "What if you could eat THIS and still hit your fitness goals?",
-        "Ever wish you could snap a photo and get a healthy recipe made for your goals?"
+        "Kamera ponsel Anda sekarang menjadi koki pribadi Anda. Begini caranya.",
+        "Bagaimana jika Anda bisa mengubah INI [tunjukkan foto hidangan lezat dengan keju dan lemak] menjadi makanan yang ramah penurunan berat badan ANDA?"
+        "Bosan dengan resep yang mengabaikan alergi dan tujuan kebugaran Anda?",
+        "Lelah dengan makanan yang tidak sesuai dengan diet Anda?",
+        "Masih mencari ide makan malam 'keto, bebas kacang'? Tonton ini...",
+        "Baru selesai latihan dan lapar? Biarkan aplikasi ini memilih makan malam Anda sambil Anda mendingin.",
+        "Berpusing-pusing mencari hidangan yang pas dengan diet Anda?",
+        "Lelah dengan persiapan makanan yang membosankan? Lihat bagaimana saya membuat keinginan saya bekerja untuk tujuan saya!",
+        "Bagaimana jika Anda bisa makan INI dan tetap mencapai tujuan kebugaran Anda?",
+        "Pernahkah Anda berharap bisa mengambil foto dan mendapatkan resep sehat yang dibuat untuk tujuan Anda?"
     ]
     preferred_cta_examples = [
-        "Download Delisio and personalize your meals!"
-        "Tap to create your first personalized recipe.",
-        "Get Delisio and solve dinner tonight.",
-        "Install Delisio and start cooking smarter",
-        "Install and turn any meal photo into your healthiest dish.",
-        "Get your AI personal chef. Tap to install now!",
-        "Download Delisio today and take control of your healthy cooking journey."
-        "Download Delisio and cook smarter in minutes.",
+        "Unduh Delisio dan personalisasi makanan Anda!"
+        "Ketuk untuk membuat resep pertama Anda yang dipersonalisasi.",
+        "Dapatkan Delisio dan selesaikan makan malam malam ini.",
+        "Instal Delisio dan mulai memasak lebih pintar",
+        "Instal dan ubah foto makanan apa pun menjadi hidangan ter-sehat Anda.",
+        "Dapatkan koki pribadi AI Anda. Ketuk untuk menginstal sekarang!",
+        "Unduh Delisio hari ini dan ambil alih perjalanan memasak sehat Anda."
+        "Unduh Delisio dan masak lebih pintar dalam hitungan menit.",
     ]
 
     # Create a clean demographic profile by excluding redundant fields
@@ -125,14 +125,14 @@ def build_creative_strategy_message(state: AgentState) -> List[BaseMessage]:
 
     # Combine the structured data with the guidelines
     user_content_string = f"""\
-    ### Campaign Brief and Audience Insights ###
+    ### Brief Kampanye dan Wawasan Audiens ###
     {structured_data_str}
 
-    ### Reels Copywriting Guideline ###
+    ### Pedoman Copywriting Reels ###
     {yaml.dump(guideline, sort_keys=False)}
 
     ---
-    Generate the JSON creative strategy based on the above information.
+    Hasilkan strategi kreatif JSON berdasarkan informasi di atas.
     """
 
     return [
@@ -197,7 +197,7 @@ def build_script_generation_message(state: AgentState) -> List[BaseMessage]:
     {yaml.dump(guideline, sort_keys=False)}
 
     ---
-    Generate the JSON creative strategy based on the above information.
+    Hasilkan strategi kreatif JSON berdasarkan informasi di atas.
     """
 
     return [
@@ -276,8 +276,8 @@ def build_evaluation_message(state: AgentState) -> List[BaseMessage]:
 {yaml.dump(guideline, sort_keys=False)}
 
 ---
-### Script to Evaluate (Current Version) ###
-Below is the ad script generated or refined for review. Analyze it against all the above context, and the evaluation criteria provided in your system prompt.
+### Skrip untuk Dievaluasi (Versi Saat Ini) ###
+Berikut adalah skrip iklan yang dihasilkan atau diperbaiki untuk ditinjau. Analisis berdasarkan semua konteks di atas, dan kriteria evaluasi yang disediakan dalam prompt sistem Anda.
 
 ```json
 {state.script_draft.model_dump_json(indent=2)}
@@ -358,7 +358,7 @@ def build_script_refinement_message(state: AgentState) -> List[BaseMessage]:
 {yaml.dump(guideline, sort_keys=False)}
 
 ---
-Based on the above context and the specific recommendations in the `evaluation_feedback` field, generate the refined ad script as a JSON object.
+Berdasarkan konteks di atas dan rekomendasi spesifik dalam bidang `evaluation_feedback`, hasilkan skrip iklan yang diperbaiki sebagai objek JSON.
 """
     return [
         SystemMessage(content=script_refinement_system_prompt),
@@ -413,7 +413,7 @@ def build_variation_generation_message(state: AgentState) -> List[BaseMessage]:
 {structured_data_str}
 
 ---
-Based on the above approved script, campaign context, and audience insights, generate 3 distinct variants optimized for A/B testing.
+Berdasarkan skrip yang disetujui di atas, konteks kampanye, dan wawasan audiens, hasilkan 3 varian berbeda yang dioptimalkan untuk pengujian A/B.
 """
     return [
         SystemMessage(content=variation_generation_system_prompt),

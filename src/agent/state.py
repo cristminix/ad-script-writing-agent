@@ -76,9 +76,9 @@ class Gender(str, Enum):
     """
     Gender identity options for the target audience.
     """
-    male = "male"
-    female = "female"
-    all = "all"
+    male = "pria"
+    female = "wanita"
+    all = "semua"
 
 
 class Countries(str, Enum):
@@ -89,6 +89,7 @@ class Countries(str, Enum):
     uk = "uk"
     canada = "canada"
     australia = "australia"
+    indonesia = "indonesia"
 
 
 class IncomeRange(str, Enum):

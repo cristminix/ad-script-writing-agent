@@ -40,7 +40,7 @@ def dynamic_list_input(
 
     st.session_state[key] = new_list
 
-    if st.button("Add another", key=f"{key}_add_button"):
+    if st.button("Tambah lainya", key=f"{key}_add_button"):
         st.session_state[key].append("")
         st.rerun()
 

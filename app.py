@@ -11,10 +11,10 @@ from src.agent.state import (CampaignGoal, AdPlatform, Product, SupportedPlatfor
 
 def initial_input_ui():
     """
-    Renders the initial form for the user to input campaign details.
+    Merender formulir awal untuk pengguna memasukkan detail kampanye.
     """
     st.set_page_config(
-        page_title="AI Ad Script Generator",
+        page_title="Generator Skrip Iklan AI",
         layout="wide",
         initial_sidebar_state="collapsed",
         page_icon="🚀"
@@ -309,8 +309,8 @@ def initial_input_ui():
     # Main Header
     st.markdown("""
     <div class="main-header">
-        <h1>🚀 Ad Script Generator Agent</h1>
-        <p>Transform your ideas into high-converting social media ad scripts with advanced AI</p>
+        <h1>🚀 Agen Generator Skrip Iklan</h1>
+        <p>Ubah ide Anda menjadi skrip iklan media sosial yang konversi tinggi dengan AI canggih</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -320,8 +320,8 @@ def initial_input_ui():
         <div class="section-header">
             <div class="section-number">1</div>
             <div>
-                <h2 class="section-title">Campaign & Ad Details</h2>
-                <p class="section-subtitle">Define the core purpose and target platform for your ad</p>
+                <h2 class="section-title">Detail Kampanye & Iklan</h2>
+                <p class="section-subtitle">Tentukan tujuan inti dan platform target untuk iklan Anda</p>
             </div>
         </div>
     </div>
@@ -330,42 +330,42 @@ def initial_input_ui():
     with st.container():
         col1, col2 = st.columns(2, gap="large")
         with col1:
-            st.markdown("**🎯 Campaign Goal**")
+            st.markdown("**🎯 Tujuan Kampanye**")
             campaign_goal = st.selectbox(
-                label="Campaign Goal",
+                label="Tujuan Kampanye",
                 options=[goal.value for goal in CampaignGoal],
                 format_func=format_enum_value,
-                help="The primary objective of this ad campaign.",
+                help="Tujuan utama dari kampanye iklan ini.",
                 label_visibility="collapsed"
             )
 
-            st.markdown("**🎨 Creative Direction**")
+            st.markdown("**🎨 Arah Kreatif**")
             creative_direction = st.selectbox(
-                label="Creative Direction",
+                label="Arah Kreatif",
                 options=[cd.value for cd in CreativeDirection],
                 index=[cd.value for cd in CreativeDirection].index(CreativeDirection.user_generated_content.value),
                 format_func=format_enum_value,
-                help="The overall messaging angle or creative approach of the ad.",
+                help="Sudut pesan atau pendekatan kreatif keseluruhan dari iklan.",
                 label_visibility="collapsed"
             )
 
         with col2:
-            st.markdown("**📱 Ad Platform**")
+            st.markdown("**📱 Platform Iklan**")
             ad_platform = st.selectbox(
-                label="Ad Platform",
+                label="Platform Iklan",
                 options=[platform.value for platform in AdPlatform],
                 format_func=format_enum_value,
-                help="The specific social media placement for the ad.",
+                help="Penempatan media sosial spesifik untuk iklan.",
                 label_visibility="collapsed"
             )
 
-            st.markdown("**🗣️ Script Tone**")
+            st.markdown("**🗣️ Nada Skrip**")
             script_tone = st.selectbox(
-                label="Script Tone",
+                label="Nada Skrip",
                 options=[st.value for st in ScriptTone],
                 index=[st.value for st in ScriptTone].index(ScriptTone.friendly.value),
                 format_func=format_enum_value,
-                help="The requested brand voice or tone for the ad script.",
+                help="Suara merek atau nada yang diminta untuk skrip iklan.",
                 label_visibility="collapsed"
             )
 
@@ -373,7 +373,7 @@ def initial_input_ui():
     st.markdown("""
     <div class="info-box">
         <span class="info-box-icon">💡</span>
-        <strong>Pro Tip:</strong> Choose platforms and tones that align with your target audience's preferences. UGC-style content typically performs best on Instagram Reels and TikTok.
+        <strong>Tip Profesional:</strong> Pilih platform dan nada yang selaras dengan preferensi audiens target Anda. Konten bergaya UGC biasanya paling baik performanya di Instagram Reels dan TikTok.
     </div>
     """, unsafe_allow_html=True)
 
@@ -385,8 +385,8 @@ def initial_input_ui():
         <div class="section-header">
             <div class="section-number">2</div>
             <div>
-                <h2 class="section-title">Product & Features</h2>
-                <p class="section-subtitle">Provide details about the mobile app you want to advertise</p>
+                <h2 class="section-title">Produk & Fitur</h2>
+                <p class="section-subtitle">Berikan detail tentang aplikasi seluler yang ingin Anda iklankan</p>
             </div>
         </div>
     </div>
@@ -396,30 +396,30 @@ def initial_input_ui():
         col1, col2 = st.columns([3, 2], gap="large")
 
         with col1:
-            st.markdown("**📱 Product Name**")
+            st.markdown("**📱 Nama Produk**")
             product_name = st.text_input(
-                label="Product Name",
-                value="Delisio - Your Personal Chef",
-                help="The name of your app.",
+                label="Nama Produk",
+                value="Delisio - Chef Pribadi Anda",
+                help="Nama aplikasi Anda.",
                 label_visibility="collapsed"
             )
 
         with col2:
-            st.markdown("**🔧 Supported Platforms**")
+            st.markdown("**🔧 Platform yang Didukung**")
             supported_platforms = st.multiselect(
-                label="Supported Platforms",
+                label="Platform yang Didukung",
                 options=[p.value for p in SupportedPlatform],
                 default=[SupportedPlatform.ios.value],
                 format_func=format_enum_value,
-                help="Select all platforms your app supports.",
+                help="Pilih semua platform yang didukung aplikasi Anda.",
                 label_visibility="collapsed"
             )
 
-        st.markdown("**📝 Product Description**")
+        st.markdown("**📝 Deskripsi Produk**")
         product_description = st.text_area(
-            label="Product Description",
-            value="Delisio is a personal chef and nutrition assistant. When a user signs up, they enter their age, weight, height, diet (e.g., vegan, keto), nutritional goal (e.g., weight loss, muscle gain), allergies, and cooking skill level. next they can use 3 main features, one is that when they scan a food, Delisio will personalize the reicpe of the food that is healthy and is alligned their unique needs. next is surprise me which creates an unseen recipe from another cuisine, or nation that meets their needs, and finally if they scan their dish, they can see in depth details of the food such as calories, fat, virtamin c, b12, iron, etc...",
-            help="A brief overview of your app.",
+            label="Deskripsi Produk",
+            value="Delisio adalah asisten chef pribadi dan nutrisi. Saat pengguna mendaftar, mereka memasukkan usia, berat badan, tinggi badan, diet (misalnya vegan, keto), tujuan nutrisi (misalnya penurunan berat badan, penambahan otot), alergi, dan tingkat keterampilan memasak. Selanjutnya mereka dapat menggunakan 3 fitur utama, pertama adalah ketika mereka memindai makanan, Delisio akan mempersonalisasi resep makanan yang sehat dan sesuai dengan kebutuhan unik mereka. Kedua adalah 'kejutkan saya' yang membuat resep tak terduga dari masakan atau negara lain yang memenuhi kebutuhan mereka, dan terakhir jika mereka memindai hidangan mereka, mereka dapat melihat detail mendalam tentang makanan seperti kalori, lemak, vitamin C, B12, zat besi, dll.",
+            help="Ikhtisar singkat tentang aplikasi Anda.",
             height=100,
             label_visibility="collapsed"
         )
@@ -427,15 +427,15 @@ def initial_input_ui():
         col_features_left, col_features_right = st.columns(2, gap="large")
 
         with col_features_left:
-            st.markdown("**📋 Product Features**")
-            st.caption("Enter each feature on a new line in the format: `Feature Name: Description`")
+            st.markdown("**📋 Fitur Produk**")
+            st.caption("Masukkan setiap fitur pada baris baru dengan format: `Nama Fitur: Deskripsi`")
             product_features_raw = st.text_area(
-                label="Product Features (Name: Description)",
-                value="Photo to Recipe: User uploads a photo of any dish, specify equipments, define calorie preference, and Delisio generates a personalized recipe tailored to their profile.\n"
-                      "Name to Recipe: User writes any dish name, specify equipments, define calorie preference, and Delisio generates a personalized recipe tailored to their profile.\n"
-                      "Surprise Me: User selects meal type, cuisine, specify equipments, define calorie preference; Delisio generates a unique, personalized recipe (e.g., a vegetarian Chinese breakfast).\n"
-                      "Nutrition Scanner: User scans their food; Delisio analyzes and reports nutrients, vitamins, and minerals.\n"
-                      "Hydration Tracker: Calculates required daily water intake based on BMI and goals, and help user track their daily water intake.\n",
+                label="Fitur Produk (Nama: Deskripsi)",
+                value="Foto ke Resep: Pengguna mengunggah foto hidangan apa pun, tentukan peralatan, tentukan preferensi kalori, dan Delisio menghasilkan resep yang dipersonalisasi sesuai profil mereka.\n"
+                      "Nama ke Resep: Pengguna menulis nama hidangan apa pun, tentukan peralatan, tentukan preferensi kalori, dan Delisio menghasilkan resep yang dipersonalisasi sesuai profil mereka.\n"
+                      "Kejutkan Saya: Pengguna memilih jenis makanan, masakan, tentukan peralatan, tentukan preferensi kalori; Delisio menghasilkan resep unik yang dipersonalisasi (misalnya, sarapan vegetarian Cina).\n"
+                      "Pemindai Nutrisi: Pengguna memindai makanan mereka; Delisio menganalisis dan melaporkan nutrisi, vitamin, dan mineral.\n"
+                      "Pelacak Hidrasi: Menghitung asupan air harian yang diperlukan berdasarkan BMI dan tujuan, dan membantu pengguna melacak asupan air harian mereka.\n",
                 height=200,
                 label_visibility="collapsed"
             )
@@ -447,42 +447,42 @@ def initial_input_ui():
 
             feature_options = list(product_features_dict.keys())
             if not feature_options:
-                feature_options = ["Enter features above first"]
+                feature_options = ["Masukkan fitur di atas terlebih dahulu"]
 
-            st.markdown("**⭐ Feature to Focus On**")
+            st.markdown("**⭐ Fitur yang Difokuskan**")
             product_feature_focus = st.selectbox(
-                label="Feature to Focus On",
+                label="Fitur yang Difokuskan",
                 options=feature_options,
-                help="Which single feature should the ad highlight?",
+                help="Fitur tunggal mana yang harus disorot oleh iklan?",
                 label_visibility="collapsed"
             )
 
         with col_features_right:
             unique_selling_point = dynamic_list_input(
-                label="🚀 Unique Selling Points (USPs)",
+                label="🚀 Poin Penjualan Unik (USP)",
                 key="usp_list",
                 default_value=[
-                    "Turn any food image into a personalized, goal-aligned recipe instantly.",
-                    "Recipes uniquely tailored to user's body metrics, diet, goals, allergies, and cooking skill.",
-                    "Discover new favorite meals, uniquely generated for user's diet and taste.",
-                    "Scan any food for instant, detailed nutritional insights (macros, micros, vitamins).",
-                    "BMI-based water goals with motivating visual tracking.",
-                    "Your all-in-one AI personal chef, nutrition guide, and hydration tracker."
+                    "Ubah gambar makanan apa pun menjadi resep yang dipersonalisasi dan selaras dengan tujuan secara instan.",
+                    "Resep yang disesuaikan secara unik dengan metrik tubuh, diet, tujuan, alergi, dan keterampilan memasak pengguna.",
+                    "Temukan makanan favorit baru, yang dihasilkan secara unik untuk diet dan selera pengguna.",
+                    "Pindai makanan apa pun untuk wawasan nutrisi instan dan mendetail (makro, mikro, vitamin).",
+                    "Target air berbasis BMI dengan pelacakan visual yang memotivasi.",
+                    "Chef pribadi AI, panduan nutrisi, dan pelacak hidrasi semua dalam satu."
                 ]
             )
 
             problems_solved = dynamic_list_input(
-                label="🎯 Problems Solved",
+                label="🎯 Masalah yang Dipecahkan",
                 key="problems_solved_list",
                 default_value=[
-                    "What should I cook tonight dilemma",
-                    "Boredom with repetitive meals",
-                    "Difficulty finding recipes that match specific dietary needs/goals",
-                    "Uncertainty about food's nutritional content",
-                    "Struggling to stay adequately hydrated",
-                    "Time constraints for healthy cooking",
-                    "Lack of confidence in the kitchen",
-                    "Generic health advice that doesn't fit"
+                    "Dilema apa yang harus saya masak malam ini",
+                    "Kebosanan dengan makanan berulang",
+                    "Kesulitan menemukan resep yang sesuai dengan kebutuhan/tujuan diet spesifik",
+                    "Ketidakpastian tentang kandungan nutrisi makanan",
+                    "Kesulitan menjaga hidrasi yang memadai",
+                    "Keterbatasan waktu untuk memasak sehat",
+                    "Kurangnya kepercayaan diri di dapur",
+                    "Saran kesehatan generik yang tidak cocok"
                 ]
             )
 
@@ -494,8 +494,8 @@ def initial_input_ui():
         <div class="section-header">
             <div class="section-number">3</div>
             <div>
-                <h2 class="section-title">Target Audience Profile</h2>
-                <p class="section-subtitle">Help the AI understand who you're talking to with a detailed persona</p>
+                <h2 class="section-title">Profil Audiens Target</h2>
+                <p class="section-subtitle">Bantu AI memahami kepada siapa Anda berbicara dengan persona yang detail</p>
             </div>
         </div>
     </div>
@@ -506,50 +506,50 @@ def initial_input_ui():
         col1, col2, col3 = st.columns(3, gap="large")
 
         with col1:
-            st.markdown("**👥 Age Range**")
+            st.markdown("**👥 Rentang Usia**")
             age_range = st.text_input(
-                label="Age Range",
+                label="Rentang Usia",
                 value="25-33",
-                help="Example: '25-33' or '18+'.",
+                help="Contoh: '25-33' atau '18+'.",
                 label_visibility="collapsed"
             )
 
-            st.markdown("**⚧️ Gender**")
+            st.markdown("**⚧️ Jenis Kelamin**")
             gender = st.selectbox(
-                label="Gender",
+                label="Jenis Kelamin",
                 options=[g.value for g in Gender],
                 format_func=format_enum_value,
-                help="Target audience gender.",
+                help="Jenis kelamin audiens target.",
                 label_visibility="collapsed"
             )
 
         with col2:
-            st.markdown("**🌍 Location**")
+            st.markdown("**🌍 Lokasi**")
             location = st.multiselect(
-                label="Location",
+                label="Lokasi",
                 options=[c.value for c in Countries],
                 default=[Countries.usa.value, Countries.uk.value, Countries.canada.value],
                 format_func=format_enum_value,
-                help="Target audience countries.",
+                help="Negara-negara audiens target.",
                 label_visibility="collapsed"
             )
 
-            st.markdown("**💰 Income Range**")
+            st.markdown("**💰 Rentang Penghasilan**")
             options_income = [i.value for i in IncomeRange]
             income_range = st.selectbox(
-                label="Income Range",
+                label="Rentang Penghasilan",
                 options=options_income,
                 index=options_income.index(IncomeRange.middle.value),
-                help="Audience's income category.",
+                help="Kategori penghasilan audiens.",
                 label_visibility="collapsed"
             )
 
         with col3:
-            st.markdown("**🎓 Education Level**")
+            st.markdown("**🎓 Tingkat Pendidikan**")
             education_level = st.selectbox(
-                label="Education Level",
+                label="Tingkat Pendidikan",
                 options=[e.value for e in EducationLevel],
-                help="Audience's highest education level.",
+                help="Tingkat pendidikan tertinggi audiens.",
                 label_visibility="collapsed"
             )
 
@@ -560,21 +560,21 @@ def initial_input_ui():
 
         with col_lifestyle:
             lifestyle = dynamic_list_input(
-                label="🏃‍♀️ Lifestyle Keywords",
+                label="🏃‍♀️ Kata Kunci Gaya Hidup",
                 key="lifestyle_list",
-                default_value=["gym", "healthy eating", "diet"]
+                default_value=["gym", "makan sehat", "diet"]
             )
 
         with col_painpoints:
             pain_points = dynamic_list_input(
-                label="😤 Pain Points",
+                label="😤 Titik Nyeri",
                 key="pain_points_list",
-                default_value=["See a photo of a dish in social media but do not have the recipe"]
+                default_value=["Melihat foto hidangan di media sosial tetapi tidak memiliki resepnya"]
             )
 
         with col_aspirations:
             aspiration = dynamic_list_input(
-                label="✨ Aspirations",
+                label="✨ Aspirasi",
                 key="aspirations_list",
                 default_value=[""]
             )
@@ -583,7 +583,7 @@ def initial_input_ui():
     st.markdown("""
     <div class="info-box">
         <span class="info-box-icon">🎯</span>
-        <strong>Audience Insights:</strong> The more specific you are about your audience's lifestyle, pain points, and aspirations, the more targeted and effective your ad script will be.
+        <strong>Wawasan Audiens:</strong> Semakin spesifik Anda tentang gaya hidup, titik nyeri, dan aspirasi audiens Anda, semakin tertarget dan efektif skrip iklan Anda.
     </div>
     """, unsafe_allow_html=True)
 
@@ -592,33 +592,33 @@ def initial_input_ui():
     # Generate Button Section
     st.markdown("""
     <div class="section-card" style="text-align: center; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);">
-        <h3 style="color: #1e293b; margin-bottom: 1rem;">🚀 Ready to Generate Your Ad Script?</h3>
-        <p style="color: #64748b; margin-bottom: 2rem;">Our AI agents will analyze your inputs and create a professional ad script optimized for your platform and audience.</p>
+        <h3 style="color: #1e293b; margin-bottom: 1rem;">🚀 Siap Menghasilkan Skrip Iklan Anda?</h3>
+        <p style="color: #64748b; margin-bottom: 2rem;">Agen AI kami akan menganalisis masukan Anda dan membuat skrip iklan profesional yang dioptimalkan untuk platform dan audiens Anda.</p>
     </div>
     """, unsafe_allow_html=True)
 
-    if st.button("🚀 Start Ad Script Generation!", type="primary", use_container_width=True):
+    if st.button("🚀 Mulai Generasi Skrip Iklan!", type="primary", use_container_width=True):
         # Validation function
         def validate_inputs():
             errors = []
             if not product_name.strip():
-                errors.append("Product name is required")
+                errors.append("Nama produk diperlukan")
             if not product_description.strip():
-                errors.append("Product description is required")
+                errors.append("Deskripsi produk diperlukan")
             if not product_features_dict:
-                errors.append("At least one product feature is required")
+                errors.append("Setidaknya satu fitur produk diperlukan")
             if not unique_selling_point or not any(usp.strip() for usp in unique_selling_point):
-                errors.append("At least one unique selling point is required")
+                errors.append("Setidaknya satu poin penjualan unik diperlukan")
             if not problems_solved or not any(prob.strip() for prob in problems_solved):
-                errors.append("At least one problem solved is required")
+                errors.append("Setidaknya satu masalah yang dipecahkan diperlukan")
             if not lifestyle or not any(life.strip() for life in lifestyle):
-                errors.append("At least one lifestyle item is required")
+                errors.append("Setidaknya satu item gaya hidup diperlukan")
             if not pain_points or not any(pain.strip() for pain in pain_points):
-                errors.append("At least one pain point is required")
+                errors.append("Setidaknya satu titik nyeri diperlukan")
             if not location:
-                errors.append("At least one location must be selected")
+                errors.append("Setidaknya satu lokasi harus dipilih")
             if not supported_platforms:
-                errors.append("At least one supported platform must be selected")
+                errors.append("Setidaknya satu platform yang didukung harus dipilih")
 
             return errors
 
@@ -626,12 +626,12 @@ def initial_input_ui():
         validation_errors = validate_inputs()
 
         if validation_errors:
-            st.error("🚨 Please fix the following errors before continuing:")
+            st.error("🚨 Harap perbaiki kesalahan berikut sebelum melanjutkan:")
             for error in validation_errors:
                 st.write(f"• {error}")
         else:
             try:
-                with st.spinner("🔄 Preparing your campaign data..."):
+                with st.spinner("🔄 Mempersiapkan data kampanye Anda..."):
                     # Create the Product object
                     product = Product(
                         product_name=product_name,
@@ -671,14 +671,14 @@ def initial_input_ui():
                     st.session_state['agent_state'] = agent_state
                     st.session_state['workflow_status'] = 'ready'
 
-                st.success("✅ Campaign configured successfully! Redirecting to AI processing...")
+                st.success("✅ Kampanye berhasil dikonfigurasi! Mengalihkan ke pemrosesan AI...")
 
                 # Navigate to processing page
                 st.switch_page("pages/processing.py")
 
             except Exception as e:
-                st.error(f"❌ Error creating workflow state: {str(e)}")
-                with st.expander("🔍 View detailed error"):
+                st.error(f"❌ Kesalahan membuat status alur kerja: {str(e)}")
+                with st.expander("🔍 Lihat kesalahan detail"):
                     st.code(traceback.format_exc())
 
 

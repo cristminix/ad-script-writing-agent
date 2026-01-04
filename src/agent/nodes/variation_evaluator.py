@@ -24,7 +24,7 @@ def variation_evaluation_node(state: AgentState) -> AgentState:
             model=config.script_evaluation_and_refinement_llm,
             api_key=config.script_evaluation_and_refinement_api_key,
             temperature=config.script_evaluation_and_refinement_temperature,
-            base_url==config.script_evaluation_and_refinement_base_url
+            base_url=config.script_evaluation_and_refinement_base_url
         )
 
         structured_llm = llm.with_structured_output(EvaluationReport, method='json_mode')
