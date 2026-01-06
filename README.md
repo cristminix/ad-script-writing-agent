@@ -1,135 +1,142 @@
-# Ads Copywriting Agent
+# Agen Penulisan Iklan (Ads Copywriting Agent)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![MVP](https://img.shields.io/badge/Status-MVP-orange?style=flat-square)
-![Your Other Badge (e.g., version, dependencies)](https://img.shields.io/badge/version-0.9.0-blue.svg)
+> Tujuan utama proyek ini adalah mengotomatisasi pembuatan konten iklan media sosial yang berkualitas tinggi dan efektif.
 
-> The main goal of this project is to automate the creation of high-quality and effective social media ads content.
-
-When it comes to AI copywriting, LLMs can certainly help, but their responses are almost **never ready for real-world application on the first try**. I've aimed to overcome this by creating a sophisticated orchestration of different LLMs. This system strategically plans, brainstorms, writes, and corrects content, ensuring quality and effectiveness are achieved automatically. The goal is to make AI more efficient for social media marketing content creation.
+Dalam penulisan iklan berbasis AI, LLM tentu dapat membantu, namun respons mereka hampir **tidak pernah siap untuk diterapkan di dunia nyata pada percobaan pertama**. Saya berusaha mengatasi ini dengan membuat orkestrasi canggih dari berbagai LLM. Sistem ini secara strategis merencanakan, melakukan brainstorming, menulis, dan mengoreksi konten, memastikan kualitas dan efektivitas tercapai secara otomatis. Tujuannya adalah membuat AI lebih efisien untuk pembuatan konten pemasaran media sosial.
 
 ---
 
-## Table of Contents
+## Daftar Isi
 
-- [System Orchestration](#system-orchestration)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Known Issues & Limitations](#known-issues--limitations)
-
----
-
-## System Orchestration
-
-In this system multi-agent system, the complex process of effective copywriting has been modularized. By assigning each step to a different LLM, we can have more control over the reasoning and creative process. This strategic orchestration ensures a higher standard of quality and more reliable output compared to a single, generalized model. The workflow is structured as follows:
-
-![Workflow Diagram](diagram/graph_diagram.png)
-
-1.  **Input Collection:** The user provides crucial campaign details, including:
-    * **Campaign goal**
-    * **Ad platform**
-    * **Product details:** name, description, features, unique selling points, and problems solved by the product
-    * **Target audience:** age range, gender, location, income range, education, lifestyle, pain points, and aspirations for using the product
-    * **Creative approach:** the messaging angle for ads
-    * **Script tone**
-
-2.  **Audience Insight Node (Market Researcher):** This node acts as an expert **market researcher** and **audience profiler**. Its core responsibility is to **synthesize** the initial user input to create a deeper, more actionable understanding of the audience. It goes beyond simple demographics to infer their psychographics, including daily routines, online behaviors, core values, and decision-making processes.
-
-3. **Creative Strategy Node (Marketing Strategist):** Acting as a skilled **Marketing Strategist** and **Creative Director**, this node takes the in-depth audience insights and campaign details to build a comprehensive creative plan. Its main job is to transform raw data into actionable ad strategies. It defines the core messaging pillars, brainstorms hooks, generates compelling CTAs, and identifies specific emotional triggers to be used in the ad. This strategic output serves as the blueprint for subsequent nodes, ensuring the final ad copy is purposeful and aligned with marketing goals.
-
-4.  **Script Generation Node (Ad Scriptwriter):** This node operates as an expert **Scriptwriter**. Its role is to take the strategic blueprint from the previous node and the initial user input to generate a full, ready to use ad script. This node's output is conditional based on the ad platform: it produces a detailed, scene-by-scene video script for dynamic platforms (like Instagram Reels or TikTok) and a concise body of copy with image details for static platforms (like Facebook or Instagram feeds). It ensures the final content is tailored to the specific platform, tone, and creative strategy, including key messages, hooks, and CTAs.
-
-5.  **Script Evaluation Node (Ad Script Evaluator):** This node functions as an **Ad Script Evaluator**. Its primary role is to assess the generated script draft against all preceding inputs, including the original campaign brief, the creative strategy, and the detailed audience insights. The evaluation is scoring the script on multiple criteria such as **hook effectiveness**, **clarity**, **emotional appeal**, and **platform compliance**. The core responsibility of this node is to determine if the script is ready for the next stage of the workflow. If the script does not meet the high-quality standards (e.g., scores are too low), this node provides highly specific, actionable feedback and recommendations in a "change THIS to THAT" format. This feedback is designed to be a direct guide for the next node, ensuring the script can be revised to a production-ready quality.
-
-6. **Script Refinement Node (Ad Script Refiner):** This node is an expert **Ad Script Refiner**. Its sole purpose is to take the script and the actionable feedback from the **Script Evaluation Node** and iteratively improve it. It operates on a "change THIS to THAT" logic, meticulously implementing the precise recommendations provided to elevate the script's quality. This node focuses exclusively on revision, not on new creative generation. It directly modifies the script's content—such as body copy, on-screen text, or visual descriptions—until it meets the high standards for final approval, ensuring the final output is a polished, production-ready ad script.
+- [Orkestrasi Sistem](#orkestrasi-sistem)
+- [Prasyarat](#prasyarat)
+- [Instalasi](#instalasi)
+- [Masalah dan Keterbatasan yang Diketahui](#masalah-dan-keterbatasan-yang-diketahui)
 
 ---
 
-## Prerequisites
+## Orkestrasi Sistem
+
+Dalam sistem multi-agent ini, proses kompleks penulisan iklan yang efektif telah dimodularisasi. Dengan menetapkan setiap langkah kepada LLM yang berbeda, kita dapat memiliki kendali lebih besar atas proses penalaran dan kreatif. Orkestrasi strategis ini memastikan standar kualitas yang lebih tinggi dan output yang lebih andal dibandingkan dengan model tunggal yang umum. Alur kerja disusun sebagai berikut:
+
+![Diagram Alur Kerja](diagram/graph_diagram.png)
+
+1.  **Pengumpulan Input:** Pengguna memberikan detail kampanye yang penting, termasuk:
+
+    - **Tujuan kampanye**
+    - **Platform iklan**
+    - **Detail produk:** nama, deskripsi, fitur, unique selling points, dan masalah yang dipecahkan oleh produk
+    - **Target audiens:** rentang usia, gender, lokasi, rentang pendapatan, pendidikan, gaya hidup, pain points, dan aspirasi menggunakan produk
+    - **Pendekatan kreatif:** sudut pesan untuk iklan
+    - **Nada skrip**
+
+2.  **Node Wawasan Audiens (Market Researcher):** Node ini berperan sebagai **peneliti pasar** dan **profiler audiens** ahli. Tanggung jawab utamanya adalah **mensintesis** input awal pengguna untuk menciptakan pemahaman audiens yang lebih mendalam dan dapat ditindaklanjuti. Node ini melampaui demografi sederhana untuk menyimpulkan psikografi mereka, termasuk rutinitas harian, perilaku online, nilai inti, dan proses pengambilan keputusan.
+
+3.  **Node Strategi Kreatif (Marketing Strategist):** Berperan sebagai **Marketing Strategist** dan **Creative Director** yang terampil, node ini mengambil wawasan audiens yang mendalam dan detail kampanye untuk membangun rencana kreatif yang komprehensif. Tugas utamanya adalah mengubah data mentah menjadi strategi iklan yang dapat ditindaklanjuti. Node ini mendefinisikan pilar pesan inti, melakukan brainstorming untuk hook, menghasilkan CTA yang menarik, dan mengidentifikasi pemicu emosional spesifik yang akan digunakan dalam iklan. Output strategis ini berfungsi sebagai cetak biru untuk node berikutnya, memastikan salinan iklan akhir memiliki tujuan dan selaras dengan tujuan pemasaran.
+
+4.  **Node Generasi Skrip (Ad Scriptwriter):** Node ini beroperasi sebagai **Scriptwriter** ahli. Perannya adalah mengambil cetak biru strategis dari node sebelumnya dan input awal pengguna untuk menghasilkan skrip iklan lengkap yang siap digunakan. Output node ini bersifat kondisional berdasarkan platform iklan: menghasilkan skrip video terperinci, adegan demi adegan, untuk platform dinamis (seperti Instagram Reels atau TikTok) dan salinan teks singkat dengan detail gambar untuk platform statis (seperti Facebook atau Instagram feed). Node ini memastikan konten akhir disesuaikan dengan platform, nada, dan strategi kreatif tertentu, termasuk pesan kunci, hook, dan CTA.
+
+5.  **Node Evaluasi Skrip (Ad Script Evaluator):** Node ini berfungsi sebagai **Ad Script Evaluator**. Peran utamanya adalah menilai draf skrip yang dihasilkan terhadap semua input sebelumnya, termasuk brief kampanye asli, strategi kreatif, dan wawasan audiens yang terperinci. Evaluasi ini memberikan skor pada skrip berdasarkan berbagai kriteria seperti **efektivitas hook**, **kejelasan**, **daya tarik emosional**, dan **kepatuhan platform**. Tanggung jawab inti node ini adalah menentukan apakah skrip siap untuk tahap selanjutnya dari alur kerja. Jika skrip tidak memenuhi standar kualitas tinggi (misalnya, skor terlalu rendah), node ini memberikan umpan balik dan rekomendasi yang sangat spesifik dan dapat ditindaklanjuti dalam format "ubah INI menjadi ITU". Umpan balik ini dirancang sebagai panduan langsung untuk node berikutnya, memastikan skrip dapat direvisi hingga mencapai kualitas siap produksi.
+
+6.  **Node Penyempurnaan Skrip (Ad Script Refiner):** Node ini adalah **Ad Script Refiner** ahli. Tujuan tunggalnya adalah mengambil skrip dan umpan balik yang dapat ditindaklanjuti dari **Node Evaluasi Skrip** dan meningkatkannya secara iteratif. Node ini beroperasi dengan logika "ubah INI menjadi ITU", dengan teliti mengimplementasikan rekomendasi yang tepat yang diberikan untuk meningkatkan kualitas skrip. Node ini berfokus secara eksklusif pada revisi, bukan pada generasi kreatif baru. Node ini secara langsung memodifikasi konten skrip—seperti teks tubuh, teks di layar, atau deskripsi visual—hingga memenuhi standar tinggi untuk persetujuan akhir, memastikan output akhir adalah skrip iklan yang dipoles dan siap produksi.
+
+---
+
+## Prasyarat
 
 - **Python 3.11+**
 - **Git**
-- **Gemini or OpenAI API key**: The project relies on API keys from both Google's **Gemini** and OpenAI's **GPT** models. If you only have one of these keys, you can edit the code inside `src/agent/nodes` to use your preferred model for each node.***
+- **Kunci API Gemini atau OpenAI**: Proyek ini bergantung pada kunci API dari model **Gemini** milik Google dan **GPT** milik OpenAI. Jika Anda hanya memiliki salah satu kunci ini, Anda dapat mengedit kode di dalam `src/agent/nodes` untuk menggunakan model pilihan Anda untuk setiap node.\*\*\*
 
-## Installation
-To get your project set up and running, you'll need to follow a few straightforward steps. 
+## Instalasi
 
-1.  **Clone the repository:**
+Untuk menyiapkan dan menjalankan proyek Anda, Anda perlu mengikuti beberapa langkah sederhana.
+
+1.  **Clone repositori:**
+
     ```bash
-    git clone https://github.com/PeymanKh/ad_script_writing_agent.git
-    cd ad_script_writing_agent
+    git clone https://github.com/cristminix/ad-script-writing-agent
+    cd ad-script-writing-agent
     ```
 
-2.  **Install dependencies:**
-    You'll need to install all the required Python libraries.
+2.  **Instal dependensi:**
+    Anda perlu menginstal semua pustaka Python yang diperlukan.
+
     ```bash
     pip install -r requirements.txt
     ```
 
-3.  **Set up environment variables:**
-    This project requires various API keys and configuration settings. You must create a `.env` file and populate it with your personal keys.
+3.  **Siapkan variabel lingkungan:**
+    Proyek ini memerlukan berbagai kunci API dan pengaturan konfigurasi. Anda harus membuat file `.env` dan mengisinya dengan kunci pribadi Anda.
+
     ```bash
     cp .env.example .env
     ```
-    Open the newly created `.env` file and replace the placeholder values with your actual API keys. You will need to provide API keys from both Google and OpenAI to run the application. or you can change codes inside `src/agent/nodes` to use your preferred model for each node.
 
-4.  **Run the application:**
-    The application runs via a Streamlit web interface. Use the following command to start it.
+    Buka file `.env` yang baru dibuat dan ganti nilai placeholder dengan kunci API aktual Anda. Anda perlu memberikan kunci API dari Google dan OpenAI untuk menjalankan aplikasi. Atau Anda dapat mengubah kode di dalam `src/agent/nodes` untuk menggunakan model pilihan Anda untuk setiap node.
+
+4.  **Jalankan aplikasi:**
+    Aplikasi berjalan melalui antarmuka web Streamlit. Gunakan perintah berikut untuk memulainya.
     ```bash
     streamlit run app.py
     ```
-    Once the command runs, a new tab will open in your browser showing the application.
+    Setelah perintah dijalankan, tab baru akan terbuka di browser Anda yang menunjukkan aplikasi.
 
 ---
-## Known Issues & Limitations
 
-> **MVP Status**: This system is currently in MVP (Minimum Viable Product) stage and **is not production-ready**. Several architectural improvements are needed before deploying in production environments.
+## Masalah dan Keterbatasan yang Diketahui
 
-### 1. Manual Human-in-the-Loop Implementation
+> **Status MVP**: Sistem ini saat ini berada dalam tahap MVP (Minimum Viable Product) dan **belum siap produksi**. Beberapa peningkatan arsitektur diperlukan sebelum menerapkannya di lingkungan produksi.
 
-**Current Issue**: The human-in-the-loop functionality is manually implemented rather than using LangGraph's native API capabilities.
+### 1. Implementasi Human-in-the-Loop Manual
 
-**Problem**: This approach lacks the robustness and persistence features that LangGraph's built-in `interrupt()` and `Command` system provides, including persistent execution state and flexible integration points.
+**Masalah Saat Ini**: Fungsi human-in-the-loop diimplementasikan secara manual, bukan menggunakan kemampuan API native LangGraph.
 
-**Better Approach**: Implement LangGraph's native human-in-the-loop patterns using:
-- `interrupt()` for dynamic pausing based on script quality scores  
-- `Command(resume=...)` for human approval/rejection workflows
-- Static interrupts (`interrupt_before`/`interrupt_after`) at key nodes like Script Evaluation
+**Masalah**: Pendekatan ini kurang memiliki ketangguhan dan fitur persistensi yang disediakan oleh sistem `interrupt()` dan `Command` bawaan LangGraph, termasuk status eksekusi persisten dan titik integrasi yang fleksibel.
 
-### 2. Infinite Refinement Loop Problem
+**Pendekatan yang Lebih Baik**: Implementasi pola human-in-the-loop native LangGraph menggunakan:
 
-**Current Issue**: The automated refinement process frequently enters infinite loops where the LLM continuously refines scripts without reaching acceptable quality thresholds.
+- `interrupt()` untuk pemberhentian dinamis berdasarkan skor kualitas skrip
+- `Command(resume=...)` untuk alur kerja persetujuan/penolakan manusia
+- Interupsi statis (`interrupt_before`/`interrupt_after`) pada node kunci seperti Script Evaluation
 
-**Current Workaround**: Hard limit of 3 review cycles, which often results in suboptimal output quality.
+### 2. Masalah Loop Penyempurnaan Tak Terbatas
 
-**Limitations of Current Approach**:
-- Scripts may still be below production quality after 3 iterations
-- No mechanism for human intervention when automated refinement fails  
-- Wastes computational resources on unproductive refinement cycles
+**Masalah Saat Ini**: Proses penyempurnaan otomatis sering masuk ke dalam loop tak terbatas di mana LLM terus-menerus menyempurnakan skrip tanpa mencapai ambang batas kualitas yang dapat diterima.
 
-**Proposed Solutions** (Requires Research):
-- **Adaptive threshold adjustment**: Lower quality thresholds after each failed iteration
-- **Human escalation**: Trigger human-in-the-loop when refinement cycles exceed 2 iterations
-- **Multi-model approach**: Switch to different LLM models for refinement after failed attempts
-- **Semantic similarity checks**: Stop refinement when changes become minimal between iterations
+**Solusi Sementara Saat Ini**: Batas keras 3 siklus tinjauan, yang sering menghasilkan kualitas output suboptimal.
 
-### 3. Production Readiness Gaps
+**Keterbatasan Pendekatan Saat Ini**:
 
-**Additional Areas Requiring Development**:
-- **Error handling**: Limited error recovery mechanisms for API failures
-- **Performance optimization**: No caching or parallel processing for multiple campaign generation  
-- **Quality validation**: Lacks comprehensive testing framework for output quality assessment
-- **Scalability**: Current architecture doesn't support concurrent user sessions effectively
+- Skrip mungkin masih di bawah kualitas produksi setelah 3 iterasi
+- Tidak ada mekanisme untuk intervensi manusia ketika penyempurnaan otomatis gagal
+- Membuang sumber daya komputasi pada siklus penyempurnaan yang tidak produktif
 
-### 4. Research Opportunities
+**Solusi yang Diusulkan** (Memerlukan Penelitian):
+
+- **Penyesuaian ambang batas adaptif**: Menurunkan ambang batas kualitas setelah setiap iterasi yang gagal
+- **Eskalasi manusia**: Memicu human-in-the-loop ketika siklus penyempurnaan melebihi 2 iterasi
+- **Pendekatan multi-model**: Beralih ke model LLM yang berbeda untuk penyempurnaan setelah upaya gagal
+- **Pemeriksaan kesamaan semantik**: Menghentikan penyempurnaan ketika perubahan menjadi minimal antar iterasi
+
+### 3. Kesenjangan Kesiapan Produksi
+
+**Area Tambahan yang Memerlukan Pengembangan**:
+
+- **Penanganan kesalahan**: Mekanisme pemulihan kesalahan terbatas untuk kegagalan API
+- **Optimalisasi kinerja**: Tidak ada caching atau pemrosesan paralel untuk pembuatan beberapa kampanye
+- **Validasi kualitas**: Kurang kerangka kerja pengujian komprehensif untuk penilaian kualitas output
+- **Skalabilitas**: Arsitektur saat ini tidak mendukung sesi pengguna bersamaan secara efektif
+
+### 4. Peluang Penelitian
 
 <details>
-<summary>Areas for Future Development</summary>
+<summary>Area untuk Pengembangan Masa Depan</summary>
 
-**Human-in-the-Loop Integration**: Implementing LangGraph's `interrupt` patterns for approval workflows, particularly at the Script Evaluation stage.
+**Integrasi Human-in-the-Loop**: Mengimplementasi pola `interrupt` LangGraph untuk alur kerja persetujuan, khususnya pada tahap Script Evaluation.
 
-**Refinement Optimization**: Developing smarter stopping criteria and quality assessment algorithms to prevent infinite loops while maintaining high output standards.
+**Optimalisasi Penyempurnaan**: Mengembangkan kriteria penghentian yang lebih cerdas dan algoritma penilaian kualitas untuk mencegah loop tak terbatas sambil mempertahankan standar output tinggi.
 
-**Quality Metrics**: Research into automated quality scoring systems that better correlate with human evaluation of ad copy effectiveness.
+**Metrik Kualitas**: Penelitian ke dalam sistem penilaian kualitas otomatis yang lebih baik berkorelasi dengan evaluasi manusia terhadap efektivitas salinan iklan.
 
 </details>
