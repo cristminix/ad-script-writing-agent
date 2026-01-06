@@ -1,6 +1,6 @@
 """
-Defines Pydantic models and enumerations for representing campaign, product, audience, and workflow state within the
-ad campaign generation system.
+Mendefinisikan model Pydantic dan enumerasi untuk merepresentasikan kampanye, produk, audiens, dan state alur kerja dalam
+sistem generasi kampanye iklan.
 
 Author: Peyman Kh
 Last Edit: 27-07-2025
@@ -15,7 +15,7 @@ from pydantic import BaseModel, Field, field_validator
 
 class CampaignGoal(str, Enum):
     """
-    Enumeration of possible objectives for an advertising campaign.
+    Enumerasi dari berbagai tujuan yang mungkin untuk kampanye iklan.
     """
     awareness = 'awareness'
     traffic = 'traffic'
@@ -26,7 +26,7 @@ class CampaignGoal(str, Enum):
 
 class AdPlatform(str, Enum):
     """
-    Enumeration of specific ad placements across different social platforms.
+    Enumerasi dari berbagai penempatan iklan spesifik di berbagai platform sosial.
     """
     instagram_reels = 'instagram_reels'
     instagram_stories = 'instagram_stories'
@@ -40,7 +40,7 @@ class AdPlatform(str, Enum):
 
 class SupportedPlatform(str, Enum):
     """
-    Mobile platforms supported by the product.
+    Platform mobile yang didukung oleh produk.
     """
     ios = "ios"
     android = "android"
@@ -49,32 +49,32 @@ class SupportedPlatform(str, Enum):
 
 class Product(BaseModel):
     """
-    Details about the app being advertised.
+    Detail tentang aplikasi yang dipromosikan.
     """
     product_name: str = Field(
-        ..., description="name of the app."
+        ..., description="nama aplikasi."
     )
     product_description: str = Field(
-        ..., description="A brief overview of the app."
+        ..., description="Ringkasan singkat tentang aplikasi."
     )
     product_features: Dict[str, str] = Field(
-        ..., description="Dictionary mapping feature names to descriptions."
+        ..., description="Kamus yang memetakan nama fitur ke deskripsi."
     )
     supported_platforms: List[SupportedPlatform] = Field(
-        description="Supported platforms for the application.",
+        description="Platform yang didukung untuk aplikasi.",
         default_factory=lambda: [SupportedPlatform.ios]
     )
     unique_selling_point: List[str] = Field(
-        ..., description="List of unique selling points for the product."
+        ..., description="Daftar poin penjualan unik untuk produk."
     )
     problems_solved: List[str] = Field(
-        ..., description="List of problems solved by the product."
+        ..., description="Daftar masalah yang dipecahkan oleh produk."
     )
 
 
 class Gender(str, Enum):
     """
-    Gender identity options for the target audience.
+    Opsi identitas gender untuk audiens target.
     """
     male = "pria"
     female = "wanita"
@@ -83,7 +83,7 @@ class Gender(str, Enum):
 
 class Countries(str, Enum):
     """
-    Enumeration of supported audience countries.
+    Enumerasi dari negara-negara audiens yang didukung.
     """
     usa = "usa"
     uk = "uk"
@@ -94,7 +94,7 @@ class Countries(str, Enum):
 
 class IncomeRange(str, Enum):
     """
-    Income range categories for audience segmentation.
+    Kategori kisaran pendapatan untuk segmentasi audiens.
     """
     low = "<$30k"
     lower_middle = "$30k–$60k"
@@ -105,7 +105,7 @@ class IncomeRange(str, Enum):
 
 class EducationLevel(str, Enum):
     """
-    Highest educational attainment of an audience segment.
+    Pencapaian pendidikan tertinggi dari segmen audiens.
     """
     none = "none"
     high_school = "high_school"
@@ -117,39 +117,39 @@ class EducationLevel(str, Enum):
 
 class AudiencePersona(BaseModel):
     """
-    Structured profile representing characteristics of the target audience.
+    Profil terstruktur yang merepresentasikan karakteristik dari audiens target.
     """
     age_range: str = Field(
-        ..., description="Age range of the target audience."
+        ..., description="Rentang usia dari audiens target."
     )
     gender: Gender = Field(
-        ..., description="Gender of the target audience."
+        ..., description="Gender dari audiens target."
     )
     location: List[Countries] = Field(
-        ..., description="List of target audience countries."
+        ..., description="Daftar negara audiens target."
     )
     income_range: IncomeRange = Field(
-        ..., description="Income range category of the target audience."
+        ..., description="Kategori kisaran pendapatan dari audiens target."
     )
     education_level: Optional[EducationLevel] = Field(
         default=None,
-        description="Education level of the target audience."
+        description="Tingkat pendidikan dari audiens target."
     )
     lifestyle: List[str] = Field(
-        ..., description="Lifestyle characteristics of the target audience."
+        ..., description="Karakteristik gaya hidup dari audiens target."
     )
     pain_points: List[str] = Field(
-        ..., description="Key pain points and challenges faced by the audience."
+        ..., description="Poin-poin utama masalah dan tantangan yang dihadapi oleh audiens."
     )
     aspiration: Optional[List[str]] =  Field(
         default=None,
-        description="What the audience wants to achieve."
+        description="Apa yang ingin dicapai oleh audiens."
     )
 
 
 class CreativeDirection(str, Enum):
     """
-    Enumeration of common creative approaches for ad messaging angles.
+    Enumerasi dari pendekatan kreatif umum untuk sudut pesan iklan.
     """
     user_generated_content = "user_generated_content"
     problem_solution = "problem_solution"
@@ -166,140 +166,140 @@ class CreativeDirection(str, Enum):
 
 class ScriptTone(str, Enum):
     """
-    Enumeration of tones that can be applied to scriptwriting for effective and engaging ad content.
+    Enumerasi dari nada yang dapat diterapkan dalam penulisan skrip untuk konten iklan yang efektif dan menarik.
     """
-    friendly = "friendly"                   # Warm, approachable, and welcoming
-    conversational = "conversational"       # Casual and natural, like a personal chat
-    authoritative = "authoritative"         # Demonstrates expertise and confidence
-    energetic = "energetic"                 # Brisk, dynamic, and high-spirited
-    enthusiastic = "enthusiastic"           # Expresses excitement and positive energy
-    humorous = "humorous"                   # Uses wit or light-heartedness for engagement
-    emotional = "emotional"                 # Appeals to feelings (joy, empathy, etc.)
-    inspirational = "inspirational"         # Uplifts and motivates with positive messaging
-    motivational = "motivational"           # Drives action through encouragement
-    trustworthy = "trustworthy"             # Sincere, credible, and reliable
-    sincere = "sincere"                     # Honest, heartfelt, and authentic
-    playful = "playful"                     # Fun, lively, and sometimes mischievous
-    urgent = "urgent"                       # Conveys time-sensitivity to prompt quick response
-    dramatic = "dramatic"                   # Uses suspense or intensity for impact
-    sophisticated = "sophisticated"         # Polished, refined, and elegant
-    professional = "professional"           # Formal, respectful, and businesslike
-    calm = "calm"                           # Gentle, relaxed, and reassuring
-    bold = "bold"                           # Daring and attention-grabbing
-    clever = "clever"                       # Smart, witty, and inventive in messaging
-    reassuring = "reassuring"               # Offers comfort and confidence in the product/brand
+    friendly = "friendly"                   # Hangat, mudah didekati, dan ramah
+    conversational = "conversational"       # Santai dan alami, seperti obrolan pribadi
+    authoritative = "authoritative"         # Menunjukkan keahlian dan kepercayaan diri
+    energetic = "energetic"                 # Lincah, dinamis, dan bersemangat tinggi
+    enthusiastic = "enthusiastic"           # Mengekspresikan semangat dan energi positif
+    humorous = "humorous"                   # Menggunakan kecerdasan atau keceriaan untuk keterlibatan
+    emotional = "emotional"                 # Menyentuh perasaan (kebahagiaan, empati, dll.)
+    inspirational = "inspirational"         # Mengangkat dan memotivasi dengan pesan positif
+    motivational = "motivational"           # Mendorong tindakan melalui semangat
+    trustworthy = "trustworthy"             # Tulus, dapat dipercaya, dan andal
+    sincere = "sincere"                     # Jujur, tulus, dan otentik
+    playful = "playful"                     # Seru, hidup, dan kadang-kadang usil
+    urgent = "urgent"                       # Menyampaikan sensitivitas waktu untuk merangsang respons cepat
+    dramatic = "dramatic"                   # Menggunakan ketegangan atau intensitas untuk dampak
+    sophisticated = "sophisticated"         # Halus, dipoles, dan elegan
+    professional = "professional"           # Formal, sopan, dan seperti bisnis
+    calm = "calm"                           # Lembut, rileks, dan menenangkan
+    bold = "bold"                           # Berani dan menarik perhatian
+    clever = "clever"                       # Pintar, cerdas, dan inovatif dalam pesan
+    reassuring = "reassuring"               # Memberikan kenyamanan dan kepercayaan terhadap produk/brand
 
 
 class AudienceInsight(BaseModel):
     """
-    structured psychographic and behavioral details of user persona
+    detail psikografik dan perilaku terstruktur dari persona pengguna
     """
     # Interests & Hobbies (Psychographic)
     common_interests: List[str] = Field(
         ...,
-        description="A list of 3 common hobbies, interests, and passions that are plausible for this audience segment. Be specific (e.g., 'sustainable living', 'DIY home improvement', 'online gaming communities')."
+        description="Daftar 3 hobi, minat, dan gairah umum yang masuk akal untuk segmen audiens ini. Bersifat spesifik (misalnya, 'hidup berkelanjutan', 'perbaikan rumah DIY', 'komunitas game online')."
     )
 
     # Media Consumption Habits (Behavioral)
     media_consumption_habits: List[str] = Field(
         ...,
-        description="3 key ways this audience consumes media, including types of content and platforms (e.g., 'spends hours on TikTok watching short-form educational content', 'prefers in-depth articles on tech blogs', 'listens to podcasts during commute')."
+        description="3 cara utama audiens ini mengonsumsi media, termasuk jenis konten dan platform (misalnya, 'menghabiskan waktu berjam-jam di TikTok menonton konten pendidikan bentuk pendek', 'lebih suka artikel mendalam di blog teknologi', 'mendengarkan podcast selama perjalanan')."
     )
 
     # Lifestyle & Daily Routine (Psychographic/Behavioral)
     typical_daily_routine_snippets: List[str] = Field(
         ...,
-        description="3 brief descriptions of typical daily activities or scenarios that define their lifestyle (e.g., 'commutes to work in a busy city', 'manages household and childcare', 'works remotely from home')."
+        description="3 deskripsi singkat dari aktivitas harian atau skenario umum yang mendefinisikan gaya hidup mereka (misalnya, 'berangkat kerja di kota sibuk', 'mengatur rumah tangga dan pengasuhan anak', 'bekerja dari rumah')."
     )
 
     # Core Values & Beliefs (Psychographic)
     core_values_and_beliefs: List[str] = Field(
         ...,
-        description="3 fundamental values or beliefs that likely influence their decisions and worldview (e.g., 'values financial stability and security', 'prioritizes environmental sustainability', 'believes in continuous self-improvement')."
+        description="3 nilai atau keyakinan fundamental yang kemungkinan mempengaruhi keputusan dan pandangan dunia mereka (misalnya, 'menghargai stabilitas dan keamanan finansial', 'memprioritaskan keberlanjutan lingkungan', 'percaya pada peningkatan diri berkelanjutan')."
     )
 
     # Purchasing Behavior & Decision-Making (Behavioral)
     decision_making_factors: List[str] = Field(
         ...,
-        description="3 key factors that influence their purchase decisions for products like yours (e.g., 'influenced by peer reviews and recommendations', 'seeks value for money', 'prioritizes convenience and time-saving', 'brand loyalty is important')."
+        description="3 faktor utama yang mempengaruhi keputusan pembelian mereka untuk produk seperti milik Anda (misalnya, 'dipengaruhi oleh ulasan dan rekomendasi rekan', 'mencari nilai untuk uang', 'memprioritaskan kenyamanan dan penghematan waktu', 'loyalitas merek penting')."
     )
 
     # Preferred Content Formats & Tone (Behavioral)
     preferred_content_formats_and_tone: List[str] = Field(
         ...,
-        description="3 types of content and tones they respond best to in advertising (e.g., 'short, engaging video tutorials', 'authentic user-generated content', 'informative infographics with a professional tone')."
+        description="3 jenis konten dan nada yang paling baik mereka respon dalam iklan (misalnya, 'tutorial video pendek yang menarik', 'konten asli yang dibuat pengguna', 'infografik informatif dengan nada profesional')."
     )
 
     # Elaborated Pain Points & Desired Outcomes (Psychographic/Motivational)
     elaborated_pain_points: List[str] = Field(
         ...,
-        description="3 more detailed, scenario-based descriptions of their key challenges and frustrations related to the problem your product solves."
+        description="3 deskripsi lebih terperinci, berbasis skenario dari tantangan dan frustrasi utama mereka terkait masalah yang dipecahkan produk Anda."
     )
     elaborated_aspiration_outcomes: List[str] = Field(
         ...,
-        description="3 specific and vivid descriptions of what they want to achieve, how they envision success, and the emotional benefit."
+        description="3 deskripsi spesifik dan jelas tentang apa yang ingin mereka capai, bagaimana mereka membayangkan kesuksesan, dan manfaat emosionalnya."
     )
 
     # Brand Perception & Trust (Psychographic/Behavioral)
     how_they_perceive_brands_like_yours: List[str] = Field(
         ...,
-        description="3 insights into how this audience typically views or interacts with brands in your product category (e.g., 'skeptical of exaggerated claims', 'expects excellent customer service', 'looks for social proof')."
+        description="3 wawasan tentang bagaimana audiens ini biasanya melihat atau berinteraksi dengan merek di kategori produk Anda (misalnya, 'skeptis terhadap klaim berlebihan', 'mengharapkan layanan pelanggan yang luar biasa', 'mencari bukti sosial')."
     )
 
     # Unique or Niche Characteristics (Psychographic)
     unique_or_niche_insights: List[str] = Field(
         ...,
-        description="2 other unique, non-obvious, or niche insights that stand out for this specific audience profile that might influence ad strategy. This is where the LLM can really shine."
+        description="2 wawasan unik, tidak jelas, atau ceruk lainnya yang menonjol untuk profil audiens spesifik ini yang mungkin mempengaruhi strategi iklan. Di sinilah LLM benar-benar bisa bersinar."
     )
 
 
 class Scene(BaseModel):
     """
-    Represents a single scene in a video ad script.
+    Mewakili satu adegan dalam skrip iklan video.
     """
-    scene_number: int = Field(..., description="Sequential number of the scene.")
-    visual_description: str = Field(..., description="Detailed description of what should be shown on screen.")
-    audio_description: str = Field(..., description="Description of background music, sound effects, or ambient noise.")
-    on_screen_text: Optional[str] = Field(None, description="Text overlays that appear on screen during this scene.")
-    voiceover_dialogue: Optional[str] = Field(None, description="Dialogue spoken by a voiceover artist or character in this scene.")
-    duration_seconds: float = Field(..., description="Approximate duration of the scene in seconds.")
+    scene_number: int = Field(..., description="Nomor urut adegan.")
+    visual_description: str = Field(..., description="Deskripsi terperinci tentang apa yang harus ditampilkan di layar.")
+    audio_description: str = Field(..., description="Deskripsi musik latar, efek suara, atau kebisingan sekitar.")
+    on_screen_text: Optional[str] = Field(None, description="Overlay teks yang muncul di layar selama adegan ini.")
+    voiceover_dialogue: Optional[str] = Field(None, description="Dialog yang diucapkan oleh seorang narator atau karakter dalam adegan ini.")
+    duration_seconds: float = Field(..., description="Durasi perkiraan adegan dalam detik.")
 
 
 class VideoScriptDraft(BaseModel):
     """
-    Structured representation of a video ad script.
+    Representasi terstruktur dari skrip iklan video.
     """
-    script_type: str = Field("Video", description="Type of script (e.g., 'Video').")
-    ad_platform_target: str = Field(..., description="The specific ad platform this script is optimized for.")
-    duration_estimate_seconds: float = Field(..., description="Estimated total duration of the script in seconds.")
+    script_type: str = Field("Video", description="Jenis skrip (misalnya, 'Video').")
+    ad_platform_target: str = Field(..., description="Platform iklan spesifik yang dioptimalkan untuk skrip ini.")
+    duration_estimate_seconds: float = Field(..., description="Perkiraan durasi total skrip dalam detik.")
     scenes: List[Scene] = Field(
         default_factory=list,
-        description="A list of structured scenes for the video ad."
+        description="Daftar adegan terstruktur untuk iklan video."
     )
-    call_to_action_text: str = Field(..., description="The main call to action text to be used.")
+    call_to_action_text: str = Field(..., description="Teks ajakan utama yang akan digunakan.")
     suggested_hashtags: List[str] = Field(
         default_factory=list,
-        description="Relevant hashtags to include with the ad post."
+        description="Tagar relevan untuk disertakan dengan postingan iklan."
     )
-    key_takeaway: str = Field(..., description="A concise sentence summarizing the ad's main point.")
+    key_takeaway: str = Field(..., description="Kalimat ringkas yang merangkum poin utama iklan.")
 
 
 class StaticAdDraft(BaseModel):
     """
-    Structured representation of a static (image/feed) ad script.
+    Representasi terstruktur dari skrip iklan statis (gambar/feed).
     """
-    script_type: str = Field("Static", description="Type of script (e.g., 'Static').")
-    ad_platform_target: str = Field(..., description="The specific ad platform this script is optimized for.")
-    headline: str = Field(..., description="The headline or primary title of the ad copy.")
-    body_copy: str = Field(..., description="The main body text of the ad copy.")
-    image_description: str = Field(..., description="A detailed description of the ad's main visual.")
-    on_image_text: str = Field(..., description="Test on the image")
-    call_to_action_text: str = Field(..., description="The main call to action text to be used.")
+    script_type: str = Field("Static", description="Jenis skrip (misalnya, 'Static').")
+    ad_platform_target: str = Field(..., description="Platform iklan spesifik yang dioptimalkan untuk skrip ini.")
+    headline: str = Field(..., description="Judul utama atau judul primer dari salinan iklan.")
+    body_copy: str = Field(..., description="Teks tubuh utama dari salinan iklan.")
+    image_description: str = Field(..., description="Deskripsi terperinci dari visual utama iklan.")
+    on_image_text: str = Field(..., description="Teks pada gambar")
+    call_to_action_text: str = Field(..., description="Teks ajakan utama yang akan digunakan.")
     suggested_hashtags: List[str] = Field(
         default_factory=list,
-        description="Relevant hashtags to include with the ad post."
+        description="Tagar relevan untuk disertakan dengan postingan iklan."
     )
-    key_takeaway: str = Field(..., description="A concise sentence summarizing the ad's main point.")
+    key_takeaway: str = Field(..., description="Kalimat ringkas yang merangkum poin utama iklan.")
 
 
 ScriptDraft = Union[VideoScriptDraft, StaticAdDraft]
@@ -307,7 +307,7 @@ ScriptDraft = Union[VideoScriptDraft, StaticAdDraft]
 
 class EvaluationCriterion(str, Enum):
     """
-    Specific criteria used to evaluate an ad script.
+    Kriteria spesifik yang digunakan untuk mengevaluasi skrip iklan.
     """
     hook = "hook"
     clarity = "clarity"
@@ -324,172 +324,172 @@ class EvaluationCriterion(str, Enum):
 
 class EvaluationMetric(BaseModel):
     """
-    Represents a single evaluation metric score.
+    Mewakili skor metrik evaluasi tunggal.
     """
-    score: int = Field(..., ge=1, le=5, description="Score for the criterion (1=Poor, 5=Excellent).")
-    feedback: str = Field(..., description="Specific, constructive feedback for this criterion.")
+    score: int = Field(..., ge=1, le=5, description="Skor untuk kriteria (1=Kurang, 5=Sangat Baik).")
+    feedback: str = Field(..., description="Umpan balik spesifik dan konstruktif untuk kriteria ini.")
 
 
 class EvaluationReport(BaseModel):
     """
-    Comprehensive report on the evaluation of an ad script, detailing scores and feedback per criterion.
+    Laporan komprehensif tentang evaluasi skrip iklan, merinci skor dan umpan balik per kriteria.
     """
-    overall_score: float = Field(..., ge=1, le=5, description="Overall aggregated score for the script (1=Poor, 5=Excellent).")
+    overall_score: float = Field(..., ge=1, le=5, description="Skor agregat keseluruhan untuk skrip (1=Kurang, 5=Sangat Baik).")
     detailed_scores: Dict[EvaluationCriterion, EvaluationMetric] = Field(
-        ..., description="Dictionary mapping each evaluation criterion to its score and specific feedback."
+        ..., description="Kamus yang memetakan setiap kriteria evaluasi ke skor dan umpan balik spesifiknya."
     )
     summary_feedback: str = Field(
-        ..., description="Concise summary of the script's strengths and areas for improvement."
+        ..., description="Ringkasan ringkas tentang kekuatan skrip dan area yang perlu ditingkatkan."
     )
     actionable_recommendations: List[str] = Field(
-        ..., description="Specific recommendation (e.g., 'Revise CTA', 'Shorten script', 'Proceed to variations')."
+        ..., description="Rekomendasi spesifik (misalnya, 'Revisi CTA', 'Perpendek skrip', 'Lanjutkan ke variasi')."
     )
     is_approved_for_next_stage: bool = Field(
-        ..., description="Indicates if the script meets quality thresholds to proceed (e.g., to human review or variation generation)."
+        ..., description="Menunjukkan apakah skrip memenuhi ambang batas kualitas untuk melanjutkan (misalnya, ke ulasan manusia atau generasi variasi)."
     )
 
 
 class VariationRequest(BaseModel):
     """
-    Request for generating a single A/B test variation with specific changes.
+    Permintaan untuk menghasilkan satu variasi uji A/B dengan perubahan spesifik.
     """
     variation_focus: str = Field(
         ...,
-        description="The primary focus of this variation (e.g., 'Hook + CTA + Emotional Tone')"
+        description="Fokus utama dari variasi ini (misalnya, 'Hook + CTA + Emotional Tone')"
     )
     target_changes: List[str] = Field(
         ...,
-        description="Specific changes to make: hook modification, CTA enhancement, emotional tone shift"
+        description="Perubahan spesifik yang akan dibuat: modifikasi hook, peningkatan CTA, pergeseran nada emosional"
     )
 
 
 class SingleVariation(BaseModel):
     """
-    Represents a single, refined A/B test variation.
+    Mewakili satu variasi uji A/B yang disempurnakan.
     """
-    variation_name: str = Field(..., description="Name/identifier for this variation")
-    variation_type: str = Field(..., description="Type of variation (e.g., 'Enhanced Hook + CTA + Tone')")
-    base_script_comparison: str = Field(..., description="Brief comparison with the base script")
-    ad_script_variation: ScriptDraft = Field(..., description="The refined variation script")
+    variation_name: str = Field(..., description="Nama/identifier untuk variasi ini")
+    variation_type: str = Field(..., description="Jenis variasi (misalnya, 'Enhanced Hook + CTA + Tone')")
+    base_script_comparison: str = Field(..., description="Perbandingan singkat dengan skrip dasar")
+    ad_script_variation: ScriptDraft = Field(..., description="Skrip variasi yang disempurnakan")
     variation_evaluation_report: Optional[EvaluationReport] = Field(
-        default=None, description="Final evaluation report for this variation"
+        default=None, description="Laporan evaluasi akhir untuk variasi ini"
     )
-    variation_iteration_count: int = Field(default=0, description="Number of refinement iterations")
-    notes: Optional[str] = Field(None, description="Additional notes about this variation")
+    variation_iteration_count: int = Field(default=0, description="Jumlah iterasi penyempurnaan")
+    notes: Optional[str] = Field(None, description="Catatan tambahan tentang variasi ini")
 
 
 class AgentState(BaseModel):
     """
-    Core state object passed between workflow nodes, capturing key context for campaign generation.
+    Objek state inti yang dilewatkan antara node alur kerja, menangkap konteks utama untuk generasi kampanye.
     """
     campaign_goal: CampaignGoal = Field(
-        ..., description="Main goal of the ad campaign."
+        ..., description="Tujuan utama kampanye iklan."
     )
     ad_platform: AdPlatform = Field(
-        ..., description="Advertising platform to be used."
+        ..., description="Platform iklan yang akan digunakan."
     )
     product: Product = Field(
-        ..., description="Details about the product being advertised."
+        ..., description="Detail tentang produk yang dipromosikan."
     )
     product_feature_focus: str = Field(
-        ..., description="Which feature should the ad focus on?"
+        ..., description="Fitur mana yang harus menjadi fokus iklan?"
     )
     audience_persona: AudiencePersona = Field(
-        ..., description="Detailed profile of the intended target audience"
+        ..., description="Profil terperinci dari audiens target yang dimaksud"
     )
     creative_direction: CreativeDirection = Field(
-        ..., description="messaging angle of the ad."
+        ..., description="sudut pesan iklan."
     )
     script_tone: ScriptTone = Field(
         ...,
-        description="Requested brand voice or tone for the ad script."
+        description="Suara atau nada brand yang diminta untuk skrip iklan."
     )
     # Workflow fields
     audience_insight: Optional[AudienceInsight] = Field(
         default=None,
-        description="Psychographic and behavioral details of user persona."
+        description="Detail psikografik dan perilaku dari persona pengguna."
     )
     brainstormed_hooks: Optional[List[str]] = Field(
         default=None,
-        description="List of brainstormed hook ideas or attention-grabbing opening lines for the script."
+        description="Daftar ide hook atau baris pembuka yang menarik perhatian yang dihasilkan dari brainstorming untuk skrip."
     )
     generated_ctas: Optional[List[str]] = Field(
         default=None,
-        description="List of generated call-to-action phrases for use in the ad script."
+        description="Daftar frasa ajakan bertindak yang dihasilkan untuk digunakan dalam skrip iklan."
     )
     core_message_pillars: Optional[List[str]] = Field(
         default=None,
-        description="3 most important messages the ad should convey."
+        description="3 pesan paling penting yang harus disampaikan oleh iklan."
     )
     emotional_triggers: Optional[List[str]] = Field(
         default=None,
-        description="Specific emotions to evoke in the audience."
+        description="Emosi spesifik yang akan ditimbulkan pada audiens."
     )
-    primary_visual_concept: str = Field(
+    primary_visual_concept: Optional[str] = Field(
         default=None,
-        description="A brief description of the recommended visual style and concepts for the ad."
+        description="Deskripsi singkat dari gaya visual dan konsep yang direkomendasikan untuk iklan."
     )
-    audio_strategy: str = Field(
+    audio_strategy: Optional[str] = Field(
         default=None,
-        description="A brief description of the recommended audio strategy (e.g., trending music, voiceover)."
+        description="Deskripsi singkat dari strategi audio yang direkomendasikan (misalnya, musik sedang tren, narator)."
     )
     script_draft: Optional[ScriptDraft] = Field(
         default=None,
-        description="Current working draft of the ad script, generated or updated during the workflow."
+        description="Draf kerja skrip iklan saat ini, yang dihasilkan atau diperbarui selama alur kerja."
     )
     evaluation_report: Optional[EvaluationReport] = Field(
         default=None,
-        description="Detailed multi-criteria report from the Evaluator Agent assessing the current script draft."
+        description="Laporan rinci berbagai kriteria dari Agen Penilai yang mengevaluasi draf skrip saat ini."
     )
     revision_feedback: Optional[str] = Field(
         default=None,
-        description="Evaluator or reviewer feedback with specific revision requests for the scriptwriter."
+        description="Umpan balik evaluator atau pemeriksa dengan permintaan revisi spesifik untuk penulis skrip."
     )
     variation_request: Optional[VariationRequest] = Field(
         default=None,
-        description="Request details for generating a single variation"
+        description="Detail permintaan untuk menghasilkan satu variasi"
     )
     variation_script_draft: Optional[ScriptDraft] = Field(
         default=None,
-        description="Current working draft of the variation script"
+        description="Draf kerja skrip variasi saat ini"
     )
     variation_evaluation_report: Optional[EvaluationReport] = Field(
         default=None,
-        description="Evaluation report for the variation script"
+        description="Laporan evaluasi untuk skrip variasi"
     )
     variation_iteration_count: int = Field(
         default=0,
-        description="Number of refinement iterations for the variation"
+        description="Jumlah iterasi penyempurnaan untuk variasi"
     )
     single_variation_result: Optional[SingleVariation] = Field(
         default=None,
-        description="Final single variation result with all refinements"
+        description="Hasil variasi tunggal akhir dengan semua penyempurnaan"
     )
     is_variation_workflow: bool = Field(
         default=False,
-        description="Flag to indicate if this is a variation generation workflow"
+        description="Tanda untuk menunjukkan apakah ini adalah alur kerja generasi variasi"
     )
     tool_calls_history: Optional[List[Dict]] = Field(
         default=None,
-        description="Chronological log of tool or agent calls invoked during the workflow, with relevant inputs/outputs."
+        description="Catatan kronologis panggilan alat atau agen yang dipanggil selama alur kerja, dengan input/output yang relevan."
     )
     script_iteration_history: Optional[List[Dict]] = Field(
         default=None,
-        description="History of script refinement iterations, including previous evaluation reports and refined scripts."
+        description="Riwayat iterasi penyempurnaan skrip, termasuk laporan evaluasi sebelumnya dan skrip yang disempurnakan."
     )
     iteration_count: int = Field(
         default=0,
-        description="Number of refinement iterations the script has gone through."
+        description="Jumlah iterasi penyempurnaan yang telah dilalui skrip."
     )
     total_llm_tokens: int = Field(
         default=0,
-        description="Total number of LLM tokens (input + output) used across all calls."
+        description="Jumlah total token LLM (input + output) yang digunakan di semua panggilan."
     )
     timestamp: Optional[datetime] = Field(
         default=None,
-        description="Timestamp indicating when this AgentState was last updated or processed."
+        description="Timestamp yang menunjukkan kapan AgentState ini terakhir diperbarui atau diproses."
     )
     human_review_decision: Optional[str] = Field(
         default=None,
-        description="Decision made by human reviewer: 'approved', 'minor_revision', or 'major_rework'."
+        description="Keputusan yang dibuat oleh pemeriksa manusia: 'approved', 'minor_revision', atau 'major_rework'."
     )
