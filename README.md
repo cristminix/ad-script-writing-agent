@@ -4,7 +4,7 @@
 
 Dalam penulisan iklan berbasis AI, LLM tentu dapat membantu, namun respons mereka hampir **tidak pernah siap untuk diterapkan di dunia nyata pada percobaan pertama**. Saya berusaha mengatasi ini dengan membuat orkestrasi canggih dari berbagai LLM. Sistem ini secara strategis merencanakan, melakukan brainstorming, menulis, dan mengoreksi konten, memastikan kualitas dan efektivitas tercapai secara otomatis. Tujuannya adalah membuat AI lebih efisien untuk pembuatan konten pemasaran media sosial.
 
-[Baca Artikel di medium](https://medium.com/me/stats/post/05712e3a0a46?statsForAllStoriesUrl=https%3A%2F%2Fmedium.com%2Fme%2Fstats&source=stats_homepage--------------------------------------------)
+[Baca Artikel di medium](https://medium.com/@pbseven/first-impression-mencicipi-proyek-ads-copywriting-agent-dibangun-dengan-langchain-framework-05712e3a0a46)
 
 ## Prasyarat
 
