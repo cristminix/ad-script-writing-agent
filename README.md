@@ -4,43 +4,7 @@
 
 Dalam penulisan iklan berbasis AI, LLM tentu dapat membantu, namun respons mereka hampir **tidak pernah siap untuk diterapkan di dunia nyata pada percobaan pertama**. Saya berusaha mengatasi ini dengan membuat orkestrasi canggih dari berbagai LLM. Sistem ini secara strategis merencanakan, melakukan brainstorming, menulis, dan mengoreksi konten, memastikan kualitas dan efektivitas tercapai secara otomatis. Tujuannya adalah membuat AI lebih efisien untuk pembuatan konten pemasaran media sosial.
 
----
-
-## Daftar Isi
-
-- [Orkestrasi Sistem](#orkestrasi-sistem)
-- [Prasyarat](#prasyarat)
-- [Instalasi](#instalasi)
-- [Masalah dan Keterbatasan yang Diketahui](#masalah-dan-keterbatasan-yang-diketahui)
-
----
-
-## Orkestrasi Sistem
-
-Dalam sistem multi-agent ini, proses kompleks penulisan iklan yang efektif telah dimodularisasi. Dengan menetapkan setiap langkah kepada LLM yang berbeda, kita dapat memiliki kendali lebih besar atas proses penalaran dan kreatif. Orkestrasi strategis ini memastikan standar kualitas yang lebih tinggi dan output yang lebih andal dibandingkan dengan model tunggal yang umum. Alur kerja disusun sebagai berikut:
-
-![Diagram Alur Kerja](diagram/graph_diagram.png)
-
-1.  **Pengumpulan Input:** Pengguna memberikan detail kampanye yang penting, termasuk:
-
-    - **Tujuan kampanye**
-    - **Platform iklan**
-    - **Detail produk:** nama, deskripsi, fitur, unique selling points, dan masalah yang dipecahkan oleh produk
-    - **Target audiens:** rentang usia, gender, lokasi, rentang pendapatan, pendidikan, gaya hidup, pain points, dan aspirasi menggunakan produk
-    - **Pendekatan kreatif:** sudut pesan untuk iklan
-    - **Nada skrip**
-
-2.  **Node Wawasan Audiens (Market Researcher):** Node ini berperan sebagai **peneliti pasar** dan **profiler audiens** ahli. Tanggung jawab utamanya adalah **mensintesis** input awal pengguna untuk menciptakan pemahaman audiens yang lebih mendalam dan dapat ditindaklanjuti. Node ini melampaui demografi sederhana untuk menyimpulkan psikografi mereka, termasuk rutinitas harian, perilaku online, nilai inti, dan proses pengambilan keputusan.
-
-3.  **Node Strategi Kreatif (Marketing Strategist):** Berperan sebagai **Marketing Strategist** dan **Creative Director** yang terampil, node ini mengambil wawasan audiens yang mendalam dan detail kampanye untuk membangun rencana kreatif yang komprehensif. Tugas utamanya adalah mengubah data mentah menjadi strategi iklan yang dapat ditindaklanjuti. Node ini mendefinisikan pilar pesan inti, melakukan brainstorming untuk hook, menghasilkan CTA yang menarik, dan mengidentifikasi pemicu emosional spesifik yang akan digunakan dalam iklan. Output strategis ini berfungsi sebagai cetak biru untuk node berikutnya, memastikan salinan iklan akhir memiliki tujuan dan selaras dengan tujuan pemasaran.
-
-4.  **Node Generasi Skrip (Ad Scriptwriter):** Node ini beroperasi sebagai **Scriptwriter** ahli. Perannya adalah mengambil cetak biru strategis dari node sebelumnya dan input awal pengguna untuk menghasilkan skrip iklan lengkap yang siap digunakan. Output node ini bersifat kondisional berdasarkan platform iklan: menghasilkan skrip video terperinci, adegan demi adegan, untuk platform dinamis (seperti Instagram Reels atau TikTok) dan salinan teks singkat dengan detail gambar untuk platform statis (seperti Facebook atau Instagram feed). Node ini memastikan konten akhir disesuaikan dengan platform, nada, dan strategi kreatif tertentu, termasuk pesan kunci, hook, dan CTA.
-
-5.  **Node Evaluasi Skrip (Ad Script Evaluator):** Node ini berfungsi sebagai **Ad Script Evaluator**. Peran utamanya adalah menilai draf skrip yang dihasilkan terhadap semua input sebelumnya, termasuk brief kampanye asli, strategi kreatif, dan wawasan audiens yang terperinci. Evaluasi ini memberikan skor pada skrip berdasarkan berbagai kriteria seperti **efektivitas hook**, **kejelasan**, **daya tarik emosional**, dan **kepatuhan platform**. Tanggung jawab inti node ini adalah menentukan apakah skrip siap untuk tahap selanjutnya dari alur kerja. Jika skrip tidak memenuhi standar kualitas tinggi (misalnya, skor terlalu rendah), node ini memberikan umpan balik dan rekomendasi yang sangat spesifik dan dapat ditindaklanjuti dalam format "ubah INI menjadi ITU". Umpan balik ini dirancang sebagai panduan langsung untuk node berikutnya, memastikan skrip dapat direvisi hingga mencapai kualitas siap produksi.
-
-6.  **Node Penyempurnaan Skrip (Ad Script Refiner):** Node ini adalah **Ad Script Refiner** ahli. Tujuan tunggalnya adalah mengambil skrip dan umpan balik yang dapat ditindaklanjuti dari **Node Evaluasi Skrip** dan meningkatkannya secara iteratif. Node ini beroperasi dengan logika "ubah INI menjadi ITU", dengan teliti mengimplementasikan rekomendasi yang tepat yang diberikan untuk meningkatkan kualitas skrip. Node ini berfokus secara eksklusif pada revisi, bukan pada generasi kreatif baru. Node ini secara langsung memodifikasi konten skrip—seperti teks tubuh, teks di layar, atau deskripsi visual—hingga memenuhi standar tinggi untuk persetujuan akhir, memastikan output akhir adalah skrip iklan yang dipoles dan siap produksi.
-
----
+[Baca Artikel di medium](https://medium.com/me/stats/post/05712e3a0a46?statsForAllStoriesUrl=https%3A%2F%2Fmedium.com%2Fme%2Fstats&source=stats_homepage--------------------------------------------)
 
 ## Prasyarat
 
