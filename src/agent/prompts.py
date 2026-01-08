@@ -17,7 +17,6 @@ IKUTI TEPAT FORMAT BERIKUT DAN JANGAN MASUKKAN FIELD SELAIN YANG TERDAFTAR DI BA
 3.  **Kepatuhan Ketat pada Format:** Output akhir **HARUS** berupa objek JSON valid yang SESUAI TEPAT dengan skema yang disediakan, TANPA FIELD TAMBAHAN, tanpa teks tambahan, header, penjelasan, atau komentar percakapan apapun.
 4.  **Bahasa:** Semua output harus dalam bahasa Indonesia.
 
-PENTING: JANGAN MASUKKAN FIELD YANG TIDAK ADA DALAM SKEMA BERIKUT. JANGAN MASUKKAN: core_message_pillars, brainstormed_hooks, generated_ctas, emotional_triggers, primary_visual_concept, audio_strategy, ATAU FIELD LAIN DARI MODEL CREATIVE STRATEGY.
 
 --- Struktur Output JSON ---
 ```json
@@ -33,6 +32,7 @@ PENTING: JANGAN MASUKKAN FIELD YANG TIDAK ADA DALAM SKEMA BERIKUT. JANGAN MASUKK
   "how_they_perceive_brands_like_yours": ["string", "string", "string"],
   "unique_or_niche_insights": ["string", "string"]
 }
+```
 """
 
 
@@ -63,6 +63,7 @@ Patuhi ketat skema JSON berikut. Nilai-nilainya harus berupa string.
   "primary_visual_concept": "string",
   "audio_strategy": "string"
 }
+```
 """
 
 
@@ -117,6 +118,7 @@ Skema output Anda bersifat kondisional berdasarkan platform iklan.
   "suggested_hashtags": ["string"],
   "key_takeaway": "string"
 }
+```
 """
 
 
@@ -201,6 +203,7 @@ Seluruh respons HARUS berupa objek JSON tunggal yang valid. Jangan serialisasi o
   "actionable_recommendations": ["string", "string"],
   "is_approved_for_next_stage": "boolean"
 }
+```
 """
 
 
@@ -255,6 +258,7 @@ Skema output Anda bersifat kondisional berdasarkan platform iklan.
   "suggested_hashtags": ["string"],
   "key_takeaway": "string"
 }
+```
 """
 
 variation_generation_system_prompt = """Anda adalah Strategis Kreatif Pengujian A/B dan Generator Varian Iklan ahli. Tugas Anda adalah menghasilkan SATU varian yang sangat efektif dari naskah iklan media sosial yang telah disetujui.
@@ -278,6 +282,7 @@ Varian Anda harus:
 Output Anda harus berupa objek JSON tunggal yang cocok dengan skema ScriptDraft. JANGAN sertakan teks, penjelasan, atau pemformatan lain di luar blok JSON.
 
 Untuk platform video:
+```json
 {
   "script_type": "Video",
   "ad_platform_target": "string",
@@ -296,8 +301,9 @@ Untuk platform video:
   "suggested_hashtags": ["string"],
   "key_takeaway": "string"
 }
-
+```
 Untuk platform statis:
+```json
 {
   "script_type": "Static",
   "ad_platform_target": "string",
@@ -309,4 +315,5 @@ Untuk platform statis:
   "suggested_hashtags": ["string"],
   "key_takeaway": "string"
 }
+```
 """

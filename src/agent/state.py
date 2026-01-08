@@ -40,11 +40,14 @@ class AdPlatform(str, Enum):
 
 class SupportedPlatform(str, Enum):
     """
-    Platform mobile yang didukung oleh produk.
+    Platform yang didukung oleh produk.
     """
     ios = "ios"
     android = "android"
     web="web"
+    desktop="desktop"
+    laptop="laptop"
+    
 
 
 class Product(BaseModel):
